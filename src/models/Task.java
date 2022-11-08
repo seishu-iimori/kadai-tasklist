@@ -16,15 +16,21 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "getAllTasks",
         query = "SELECT t FROM Task AS t ORDER BY t.id DESC"
-    )
+    ),
+    @NamedQuery(
+        name = "getTaskCount",
+        query = "SELECT COUNT(t) FROM Task AS t"
+        )
 })
 @Table(name = "tasks")
-
 public class Task {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "title", length = 255, nullable = false)
+    private String title;
 
     @Column(name = "content", length = 255, nullable = false)
     private String content;
@@ -66,5 +72,7 @@ public class Task {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
-}
 
+
+
+}
